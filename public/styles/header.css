@@ -1,0 +1,21 @@
+body > header {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-color: #da9334;
+  border-radius: 10px;
+  margin: 1px 0px 1px 0px;
+  background-image: url(../images/foggy-birds.png);
+}
+body > header img {
+  filter: drop-shadow(4px 4px 6px #624117);
+}
+body > header h2 {
+  text-shadow: 2px 2px 3px #624117;
+  margin-block-start: 0em;
+}
+
+

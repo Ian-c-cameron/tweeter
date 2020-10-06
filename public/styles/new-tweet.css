@@ -1,0 +1,28 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > label {
+  font-weight: bold;
+}
+
+#tweet-text {
+  border-width: 0 0 3px 0;
+  height: 1.2em;
+  resize: none;
+  overflow: hidden;
+  background-color: #f4f1ec;
+}
+
+form > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: 'Bungee', cursive;
+  margin-top: 10px;
+}
+form button {
+  color: #FFFFFF;
+  background-color: #4056A1;
+}

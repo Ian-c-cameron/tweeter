@@ -4,34 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-/************************
- * Fake data for testing
- */
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "createdAt": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "createdAt": 1461113959088
-  }
-];
-
 /*************
  * FUNCTIONS
  */
@@ -95,11 +67,22 @@ const createTweetElement = function(tweet) {
   return $tweet;
 };
 
-const renderTweets = function(tweets) {
+const renderTweets = function(tweets, $container) {
   for (const tweet in tweets) {
     const $tweet = createTweetElement(tweets[tweet]);
-    $('#tweets-container').append($tweet);
+    $container.append($tweet);
   }
+};
+const loadTweets = function(callback) {
+  $.ajax('/tweets/', { method: 'GET', dataType: 'JSON'})
+    .then(res => callback(res));
+};
+
+const refreshTweets = function($container) {
+  $(document).ready(function() {
+    $($container).empty();
+    loadTweets(data => renderTweets(data, $container));
+  });
 };
 
 /***************************
@@ -111,10 +94,11 @@ $(document).ready(function() {
   /**
    * Render Dynamic Content
    */
-  renderTweets(data);
+  loadTweets(data => renderTweets(data, $('#tweets-container')));
+  //renderTweets(data, $('#tweets-container'));
   /**
   * Listeners:
-  * -hover over tweet boxes
+  * Hover over tweet cards
   */
   $("article").hover(function() {
     $(this).css("box-shadow", "6px 6px 9px #1d284b");
@@ -126,6 +110,28 @@ $(document).ready(function() {
     $(this).css("font-weight", "normal");
     let handle = $(this).children().first().children().last();
     handle.css("display", "none");
+  });
+  /**
+   * Tweet Submission Listener
+   */
+  $('.new-tweet > form').submit(event => {
+    event.preventDefault();
+    let $input = $('#tweet-text');
+    if ($input.val().length < 1) {
+      alert("Please enter some text.");
+      return;
+    }
+    if ($input.val().length > 140) {
+      alert("You can only post 140 characters at a time.");
+      return;
+    }
+    let $counter = $input.next().children().last();
+    const out = $input.serialize();
+    $input.val('');
+    $counter.val(140);
+    $.ajax('/tweets/', { method: 'POST', data: out })
+      .then(refreshTweets($('#tweets-container')))
+      .catch(console.log('tweet fail'));
   });
 });
 

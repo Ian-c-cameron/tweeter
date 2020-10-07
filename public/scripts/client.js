@@ -3,7 +3,119 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+
+/************************
+ * Fake data for testing
+ */
+const data = [
+  {
+    "user": {
+      "name": "Newton",
+      "avatars": "https://i.imgur.com/73hZDYK.png"
+      ,
+      "handle": "@SirIsaac"
+    },
+    "content": {
+      "text": "If I have seen further it is by standing on the shoulders of giants"
+    },
+    "createdAt": 1461116232227
+  },
+  {
+    "user": {
+      "name": "Descartes",
+      "avatars": "https://i.imgur.com/nlhLi3I.png",
+      "handle": "@rd" },
+    "content": {
+      "text": "Je pense , donc je suis"
+    },
+    "createdAt": 1461113959088
+  }
+];
+
+/*************
+ * FUNCTIONS
+ */
+/**
+ * getAge - takes a timestamp, and produces a readable age
+ * @param {*} timestamp a previous time
+ */
+const getAge = function(timestamp) {
+  //baseDiff is in milliseconds
+  const baseDiff = Date.now() - timestamp;
+
+  //diff is in seconds if less than a minute
+  if (baseDiff < 60000) {
+    let diff = Math.floor(baseDiff / 1000);
+    return `${diff} seconds ago`;
+  }
+  //diff is in minutes if less than an hour
+  if (baseDiff < 3600000) {
+    let diff = Math.floor(baseDiff / 60000);
+    return `${diff} minutes ago`;
+  }
+  //diff is in hours if less than a day
+  if (baseDiff < 86400000) {
+    let diff = Math.floor(baseDiff / 3600000);
+    return `${diff} hours ago`;
+  }
+  //diff is in days if less than a week
+  if (baseDiff < 604800000) {
+    let diff = Math.floor(baseDiff / 86400000);
+    return `${diff} days ago`;
+  }
+  //return in weeks(anything more than a few weeks old is ancient anyway)
+  let diff = Math.floor(baseDiff / 604800000);
+  return `${diff} weeks ago`;
+};
+
+/**
+ * createTweetElement - takes a tweet object, and translates it to HTML
+ * @param {*} tweet a tweet data object to be formatted for display
+ */
+const createTweetElement = function(tweet) {
+  let output = `<br>`;
+  //below is an experiment in building HTML in a readable way
+  output += `<article>`;
+  output += `  <header>`;
+  output += `    <div>`;
+  output += `      <div>`;
+  output += `        <img src="${tweet.user.avatars}">`;
+  output += `      </div>`;
+  output += `      <h4>${tweet.user.name}</h4>`;
+  output += `    </div>`;
+  output += `    <h4>${tweet.user.handle}</h4>`;
+  output += `  </header>`;
+  output += `  <section>${tweet.content.text}</section>`;
+  output += `  <footer>`;
+  output += `    <span>${getAge(tweet.createdAt)}</span>`;
+  output += `    <div>share/like buttons</div>`;
+  output += `  </footer>`;
+  output += `</article>`;
+  const $tweet = $(output);
+  return $tweet;
+};
+
+const renderTweets = function(tweets) {
+  for (const tweet in tweets) {
+    const $tweet = createTweetElement(tweets[tweet]);
+    $('#tweets-container').append($tweet);
+  }
+};
+
+/***************************
+ * Main Code Execution:
+ * -render dynamically generated elements
+ * -create listeners
+ */
 $(document).ready(function() {
+  /**
+   * Render Dynamic Content
+   */
+  renderTweets(data);
+  /**
+  * Listeners:
+  * -hover over tweet boxes
+  */
   $("article").hover(function() {
     $(this).css("box-shadow", "6px 6px 9px #1d284b");
     $(this).css("font-weight", "bold");
@@ -16,3 +128,4 @@ $(document).ready(function() {
     handle.css("display", "none");
   });
 });
+

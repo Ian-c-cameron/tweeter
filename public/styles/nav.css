@@ -1,4 +1,7 @@
 nav {
+  position: fixed;
+  top: 0;
+  z-index: 1;
   display: flex;
   align-items: flex-end;
   background-color: #4056A1;
@@ -6,6 +9,7 @@ nav {
   border-radius: 10px;
   height: 120px;
   width: 100vw;
+  max-width:100%;
   padding: 1.5em;
 }
 

@@ -3,11 +3,12 @@ body > header {
   flex-direction: column;
   height: 400px;
   width: 100vw;
+  max-width:100%;
   justify-content: center;
   align-items: center;
   background-color: #da9334;
   border-radius: 10px;
-  margin: 1px 0px 1px 0px;
+  margin: 122px 0px 1px 0px;
   background-image: url(../images/foggy-birds.png);
 }
 body > header img {

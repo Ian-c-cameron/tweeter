@@ -108,21 +108,20 @@ $(document).ready(function() {
    * Initial Render of tweets
    */
   loadTweets(data => renderTweets(data, $('#tweets-container')));
-});
 
-/**
-* Listeners:
-*/
-$(document).ready(function() {
   /**
+  * Listeners:
    * Hover over tweet cards
    */
-  $("article.tweet").hover(function() {
+  $("#tweets-container").on('mouseenter', '.tweet', function() {
+    console.log('hover fired');
     $(this).css("box-shadow", "6px 6px 9px #1d284b");
     $(this).css("font-weight", "bold");
     let handle = $(this).children().first().children().last();
     handle.css("display", "inline");
-  }, function() {
+  });
+  $("#tweets-container").on('mouseleave', '.tweet', function() {
+    console.log('hover 222')
     $(this).css("box-shadow", "none");
     $(this).css("font-weight", "normal");
     let handle = $(this).children().first().children().last();
@@ -132,7 +131,7 @@ $(document).ready(function() {
    * Hover over newTweet buttons
    */
   $("button.newTweet").hover(function() {
-    $(this).css("box-shadow", "4px 4px 6px black");
+    $(this).css("box-shadow", "4px 4px 6px #1d284b");
   }, function() {
     $(this).css("box-shadow", "none");
   });
@@ -178,7 +177,7 @@ $(document).ready(function() {
   });
   
   $('#goToTop').hover(function() {
-    $('#goToTop').css("box-shadow", "4px 4px 6px black");
+    $('#goToTop').css("box-shadow", "4px 4px 6px #1d284b");
   }, function() {
     $('#goToTop').css("box-shadow", 'none');
   });

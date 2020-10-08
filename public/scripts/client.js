@@ -41,6 +41,16 @@ const getAge = function(timestamp) {
 };
 
 /**
+ * excapt - sanitizes strings to prevent XSS attacks
+ * @param {*} str string to be made safe for display in HTML
+ */
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+/**
  * createTweetElement - takes a tweet object, and translates it to HTML
  * @param {*} tweet a tweet data object to be formatted for display
  */
@@ -53,11 +63,11 @@ const createTweetElement = function(tweet) {
   output += `      <div>`;
   output += `        <img src="${tweet.user.avatars}">`;
   output += `      </div>`;
-  output += `      <h4>${tweet.user.name}</h4>`;
+  output += `      <h4>${escape(tweet.user.name)}</h4>`;
   output += `    </div>`;
-  output += `    <h4>${tweet.user.handle}</h4>`;
+  output += `    <h4>${escape(tweet.user.handle)}</h4>`;
   output += `  </header>`;
-  output += `  <section>${tweet.content.text}</section>`;
+  output += `  <p>${escape(tweet.content.text)}</p>`;
   output += `  <footer>`;
   output += `    <span>${getAge(tweet.createdAt)}</span>`;
   output += `    <div>share/like buttons</div>`;
@@ -68,11 +78,14 @@ const createTweetElement = function(tweet) {
 };
 
 const renderTweets = function(tweets, $container) {
-  for (const tweet in tweets) {
+  const keys = Object.keys(tweets);
+  for (let i = keys.length - 1; i >= 0; i--) {
+    const tweet = keys[i];
     const $tweet = createTweetElement(tweets[tweet]);
     $container.append($tweet);
   }
 };
+
 const loadTweets = function(callback) {
   $.ajax('/tweets/', { method: 'GET', dataType: 'JSON'})
     .then(res => callback(res));
@@ -117,20 +130,26 @@ $(document).ready(function() {
   $('.new-tweet > form').submit(event => {
     event.preventDefault();
     let $input = $('#tweet-text');
+    const $error = $('.new-tweet > .error');
     if ($input.val().length < 1) {
-      alert("Please enter some text.");
+      $error.text("! Please enter some text. !");
+      $error.slideDown();
       return;
     }
     if ($input.val().length > 140) {
-      alert("You can only post 140 characters at a time.");
+      $error.text("! Tweets must be under 140 characters. !");
+      $error.slideDown();
       return;
+    }
+    if ($($error).is(":visible")) {
+      $error.slideUp();
     }
     let $counter = $input.next().children().last();
     const out = $input.serialize();
     $input.val('');
     $counter.val(140);
     $.ajax('/tweets/', { method: 'POST', data: out })
-      .then(refreshTweets($('#tweets-container')))
+      .then(() => refreshTweets($('#tweets-container')))
       .catch(console.log('tweet fail'));
   });
 });

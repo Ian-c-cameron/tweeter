@@ -29,8 +29,9 @@ article > header > h4 {
   display: none;
 }
 
-article > section {
+article > p {
   padding: 1em;
+  word-wrap: break-word;
 }
 
 article > footer {

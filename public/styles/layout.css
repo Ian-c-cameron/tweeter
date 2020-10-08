@@ -24,6 +24,7 @@ body {
   align-items: center;
 }
 
+
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
@@ -38,4 +39,17 @@ main > section {
   display: flex;
   flex-direction: column;
   padding-bottom: 1.5em;
+}
+
+@media only screen and (min-width: 1024px) {
+  body {
+    flex-direction: row;
+  }
+  
+  main {
+    margin: 122px 0px 1px 0px;
+    flex: 1;
+    padding: 1rem;
+  }
+
 }

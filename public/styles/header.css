@@ -19,11 +19,22 @@ body > header h2 {
   margin-block-start: 0em;
 }
 
+body > header > button.newTweet {
+  color: #4056A1;
+  background-color: Transparent;
+  border: 2px solid #4056A1;
+  border-radius: 10px;
+}
+
 @media only screen and (min-width: 1024px) {
   body > header {
     flex: 1;
     margin: 140px 1rem 0px 1rem;
     align-self: normal;
+  }
+
+  body > header > button.newTweet {
+    display: none;
   }
 }
 

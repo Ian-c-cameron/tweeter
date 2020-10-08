@@ -57,7 +57,7 @@ const escape =  function(str) {
 const createTweetElement = function(tweet) {
   let output = `<br>`;
   //below is an experiment in building HTML in a readable way
-  output += `<article>`;
+  output += `<article class='tweet'>`;
   output += `  <header>`;
   output += `    <div>`;
   output += `      <div>`;
@@ -105,15 +105,19 @@ const refreshTweets = function($container) {
  */
 $(document).ready(function() {
   /**
-   * Render Dynamic Content
+   * Initial Render of tweets
    */
   loadTweets(data => renderTweets(data, $('#tweets-container')));
-  //renderTweets(data, $('#tweets-container'));
+});
+
+/**
+* Listeners:
+*/
+$(document).ready(function() {
   /**
-  * Listeners:
-  * Hover over tweet cards
-  */
-  $("article").hover(function() {
+   * Hover over tweet cards
+   */
+  $("article.tweet").hover(function() {
     $(this).css("box-shadow", "6px 6px 9px #1d284b");
     $(this).css("font-weight", "bold");
     let handle = $(this).children().first().children().last();
@@ -125,7 +129,27 @@ $(document).ready(function() {
     handle.css("display", "none");
   });
   /**
-   * Tweet Submission Listener
+   * Hover over newTweet buttons
+   */
+  $("button.newTweet").hover(function() {
+    $(this).css("box-shadow", "4px 4px 6px black");
+  }, function() {
+    $(this).css("box-shadow", "none");
+  });
+  /**
+   * Click to open tweet submission form
+   */
+  $("button.newTweet").click(function() {
+    $('section.new-tweet').slideToggle();
+    $(document).ready(function() {
+      if (!$('section.new-tweet').is('visible')) {
+        $('#tweet-text').focus();
+      }
+    });
+    
+  });
+  /**
+   * Tweet Submission
    */
   $('.new-tweet > form').submit(event => {
     event.preventDefault();
@@ -150,7 +174,30 @@ $(document).ready(function() {
     $counter.val(140);
     $.ajax('/tweets/', { method: 'POST', data: out })
       .then(() => refreshTweets($('#tweets-container')))
-      .catch(console.log('tweet fail'));
+      .catch(() => console.log('tweet fail'));
+  });
+  
+  $('#goToTop').hover(function() {
+    $('#goToTop').css("box-shadow", "4px 4px 6px black");
+  }, function() {
+    $('#goToTop').css("box-shadow", 'none');
+  });
+  /**
+   * scroll to top when goToTop button clicked
+   */
+  $('#goToTop').click(function() {
+    $(window).scrollTop(0);
+  });
+  /**
+   * when scrolled down show goToTop button
+   */
+  $(window).on('scroll', function() {
+    console.log($(this).scrollTop());
+    if ($(this).scrollTop()) {
+      $('#goToTop').css('display', 'inline');
+    } else {
+      $('#goToTop').css('display', 'none');
+    }
   });
 });
 

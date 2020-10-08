@@ -18,9 +18,16 @@ nav > span {
   font-size: 35px;
   text-shadow: 6px 6px 9px #1d284b;
 }
+nav > button.newTweet {
+  color: #FFFFFF;
+    background-color: Transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+}
 
 @media only screen and (min-width: 1024px) {
   nav {
     display: flex;
+    justify-content: space-between;
   }
 }

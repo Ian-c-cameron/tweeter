@@ -14,6 +14,9 @@ article {
     display: flex;
     justify-content: space-between;
     padding: 1em;
+    & > div {
+      display: none;
+    }
   }
   & > header {
     display: flex;

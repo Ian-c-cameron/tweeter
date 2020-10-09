@@ -70,7 +70,7 @@ const createTweetElement = function(tweet) {
   output += `  <p>${escape(tweet.content.text)}</p>`;
   output += `  <footer>`;
   output += `    <span>${getAge(tweet.created_at)}</span>`;
-  output += `    <div>share/like buttons</div>`;
+  output += `    <div>🏴 🔄 💙</div>`;
   output += `  </footer>`;
   output += `</article>`;
   const $tweet = $(output);
@@ -129,14 +129,16 @@ $(document).ready(function() {
   $('#tweets-container').on('mouseenter', '.tweet', function() {
     $(this).css('box-shadow', '6px 6px 9px #1d284b');
     $(this).css('font-weight', 'bold');
-    let handle = $(this).children().first().children().last();
-    handle.css('display', 'inline');
+    let $handle = $(this).children().first().children().last();
+    $handle.css('display', 'inline');
+    $('article > footer > div').css('display', 'inline');
   });
   $('#tweets-container').on('mouseleave', '.tweet', function() {
     $(this).css('box-shadow', 'none');
     $(this).css('font-weight', 'normal');
     let handle = $(this).children().first().children().last();
     handle.css('display', 'none');
+    $('article > footer > div').css('display', 'none');
   });
   /**
    * Hover over newTweet buttons
@@ -158,13 +160,6 @@ $(document).ready(function() {
     });
     
   });
-  $('#tweet-text').keypress(function(e) {
-    const code = (e.keyCode ? e.keyCode : e.which);//care of Rohan Kumar https://stackoverflow.com/questions/19804378/jquery-to-submit-textarea-with-enter-key
-    if (code === 13) {
-      $(".new-tweet button").trigger('click');
-      return true;
-    }
-  });
   /**
    * Tweet Submission
    */
@@ -175,11 +170,13 @@ $(document).ready(function() {
     if ($input.val().length < 1) {
       $error.text('! Please enter some text. !');
       $error.slideDown();
+      $('#tweet-text').focus();
       return;
     }
     if ($input.val().length > 140) {
       $error.text('! Tweets must be under 140 characters. !');
       $error.slideDown();
+      $('#tweet-text').focus();
       return;
     }
     if ($($error).is(':visible')) {

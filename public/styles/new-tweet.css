@@ -21,7 +21,7 @@ form button {
 form > label {
   font-weight: bold;
 }
-form > dif {
+form > div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

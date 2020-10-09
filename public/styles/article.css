@@ -16,6 +16,9 @@ article > footer {
   justify-content: space-between;
   padding: 1em;
 }
+article > footer > div {
+  display: none;
+}
 article > header {
   display: flex;
   justify-content: space-between;

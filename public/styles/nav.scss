@@ -1,0 +1,33 @@
+$fontColor: #FFFFFF;
+nav {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  display: none;
+  align-items: flex-end;
+  background-color: #4056A1;
+  color: $fontColor;
+  border-radius: 10px;
+  height: 120px;
+  width: 100vw;
+  max-width:100%;
+  padding: 1.5em;
+  & > span {
+    font-family: 'Bungee', cursive;
+    font-size: 35px;
+    text-shadow: 6px 6px 9px #1d284b;
+  }
+  & > button.newTweet {
+    color: $fontColor;
+    background-color: Transparent;
+    border: 2px solid $fontColor;
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+  }
+}

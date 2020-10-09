@@ -4,7 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-/*************
+/*********************************************************************
  * FUNCTIONS
  */
 /**
@@ -41,7 +41,7 @@ const getAge = function(timestamp) {
 };
 
 /**
- * excapt - sanitizes strings to prevent XSS attacks
+ * excape - sanitizes strings to prevent XSS attacks
  * @param {*} str string to be made safe for display in HTML
  */
 const escape =  function(str) {
@@ -61,7 +61,7 @@ const createTweetElement = function(tweet) {
   output += `  <header>`;
   output += `    <div>`;
   output += `      <div>`;
-  output += `        <img src="${tweet.user.avatars}">`;
+  output += `        <img src='${tweet.user.avatars}'>`;
   output += `      </div>`;
   output += `      <h4>${escape(tweet.user.name)}</h4>`;
   output += `    </div>`;
@@ -77,6 +77,11 @@ const createTweetElement = function(tweet) {
   return $tweet;
 };
 
+/**
+ * renderTweets - renders tweet data into HTML cards for display
+ * @param {*} tweets preprocessed tweet data
+ * @param {*} $container where to render the tweet cards
+ */
 const renderTweets = function(tweets, $container) {
   const keys = Object.keys(tweets);
   for (let i = keys.length - 1; i >= 0; i--) {
@@ -86,11 +91,19 @@ const renderTweets = function(tweets, $container) {
   }
 };
 
+/**
+ * loadTweets - fetches tweet data, passes them to a callback
+ * @param {*} callback a function to send the retrieved data
+ */
 const loadTweets = function(callback) {
   $.ajax('/tweets/', { method: 'GET', dataType: 'JSON'})
     .then(res => callback(res));
 };
 
+/**
+ * Clears the loaded tweets, and reloads them from the server
+ * @param {*} $container a DOM element to put tweets into
+ */
 const refreshTweets = function($container) {
   $(document).ready(function() {
     $($container).empty();
@@ -98,7 +111,7 @@ const refreshTweets = function($container) {
   });
 };
 
-/***************************
+/*****************************************************************
  * Main Code Execution:
  * -render dynamically generated elements
  * -create listeners
@@ -111,34 +124,32 @@ $(document).ready(function() {
 
   /**
   * Listeners:
-   * Hover over tweet cards
-   */
-  $("#tweets-container").on('mouseenter', '.tweet', function() {
-    console.log('hover fired');
-    $(this).css("box-shadow", "6px 6px 9px #1d284b");
-    $(this).css("font-weight", "bold");
+  * Hover over tweet cards
+  */
+  $('#tweets-container').on('mouseenter', '.tweet', function() {
+    $(this).css('box-shadow', '6px 6px 9px #1d284b');
+    $(this).css('font-weight', 'bold');
     let handle = $(this).children().first().children().last();
-    handle.css("display", "inline");
+    handle.css('display', 'inline');
   });
-  $("#tweets-container").on('mouseleave', '.tweet', function() {
-    console.log('hover 222')
-    $(this).css("box-shadow", "none");
-    $(this).css("font-weight", "normal");
+  $('#tweets-container').on('mouseleave', '.tweet', function() {
+    $(this).css('box-shadow', 'none');
+    $(this).css('font-weight', 'normal');
     let handle = $(this).children().first().children().last();
-    handle.css("display", "none");
+    handle.css('display', 'none');
   });
   /**
    * Hover over newTweet buttons
    */
-  $("button.newTweet").hover(function() {
-    $(this).css("box-shadow", "4px 4px 6px #1d284b");
+  $('button.newTweet').hover(function() {
+    $(this).css('box-shadow', '4px 4px 6px #1d284b');
   }, function() {
-    $(this).css("box-shadow", "none");
+    $(this).css('box-shadow', 'none');
   });
   /**
    * Click to open tweet submission form
    */
-  $("button.newTweet").click(function() {
+  $('button.newTweet').click(function() {
     $('section.new-tweet').slideToggle();
     $(document).ready(function() {
       if (!$('section.new-tweet').is('visible')) {
@@ -155,16 +166,16 @@ $(document).ready(function() {
     let $input = $('#tweet-text');
     const $error = $('.new-tweet > .error');
     if ($input.val().length < 1) {
-      $error.text("! Please enter some text. !");
+      $error.text('! Please enter some text. !');
       $error.slideDown();
       return;
     }
     if ($input.val().length > 140) {
-      $error.text("! Tweets must be under 140 characters. !");
+      $error.text('! Tweets must be under 140 characters. !');
       $error.slideDown();
       return;
     }
-    if ($($error).is(":visible")) {
+    if ($($error).is(':visible')) {
       $error.slideUp();
     }
     let $counter = $input.next().children().last();
@@ -175,11 +186,13 @@ $(document).ready(function() {
       .then(() => refreshTweets($('#tweets-container')))
       .catch(() => console.log('tweet fail'));
   });
-  
+  /**
+   * hover over goToTop button
+   */
   $('#goToTop').hover(function() {
-    $('#goToTop').css("box-shadow", "4px 4px 6px #1d284b");
+    $('#goToTop').css('box-shadow', '4px 4px 6px #1d284b');
   }, function() {
-    $('#goToTop').css("box-shadow", 'none');
+    $('#goToTop').css('box-shadow', 'none');
   });
   /**
    * scroll to top when goToTop button clicked
@@ -191,7 +204,6 @@ $(document).ready(function() {
    * when scrolled down show goToTop button
    */
   $(window).on('scroll', function() {
-    console.log($(this).scrollTop());
     if ($(this).scrollTop()) {
       $('#goToTop').css('display', 'inline');
     } else {

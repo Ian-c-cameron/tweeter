@@ -1,67 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
 
     <!-- External CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css' type='text/css' />
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet"> 
+    <link href='https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,700;1,300;1,700&display=swap' rel='stylesheet'> 
     
     <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/article.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+    <link rel='stylesheet' href='/styles/layout.css' type='text/css' />
+    <link rel='stylesheet' href='/styles/nav.css' type='text/css' />
+    <link rel='stylesheet' href='/styles/header.css' type='text/css' />
+    <link rel='stylesheet' href='/styles/new-tweet.css' type='text/css' />
+    <link rel='stylesheet' href='/styles/article.css' type='text/css' />
+    <link rel='stylesheet' href='/styles/footer.css' type='text/css' />
 
     <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 
     <!-- App JS -->
-    <script type="text/javascript" src="/scripts/client.js"></script>
-    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+    <script type='text/javascript' src='/scripts/client.js'></script>
+    <script type='text/javascript' src='/scripts/composer-char-counter.js'></script>
   </head>
 
   <body>
     <!-- Top nav bar (fixed) -->
     <nav>
-      <span>tweeter</span>
-      <button class="newTweet"><b>Write</b> a new tweet</button>
+      <span class='logo'>tweeter</span>
+      <button class='newTweet'><b>Write</b> a new tweet</button>
     </nav>
 
     <!-- Header -->
     <header>
+      <section>
+        <h2 class='logo'>tweeter</h2>
+      </section>
       <div>
-          <img src="/images/profile-hex.png"> 
-      </div>
-      <div>
+          <img src='/images/profile-hex.png'> 
           <h2>Your Name</h2>
+          <button class='newTweet'><b>Write</b> a new tweet</button>
       </div>
-      <button class="newTweet"><b>Write</b> a new tweet</button>
+      <section>
+        <button class='newTweet'><b>Write</b> a new tweet</button>
+      </section>
     </header>
   
     <!-- Page-specific (main) content here -->
-    <main class="container">
-      <section class="new-tweet">
-        <span class="error">Error Here</span>
-        <form action="/tweets/" method="POST">
-          <label for="tweet-text">What are you humming about?</label>
-          <textarea name="text" id="tweet-text"></textarea>
+    <main class='container'>
+      <section class='new-tweet'>
+        <span class='error'>Error Here</span>
+        <form action='/tweets/' method='POST'>
+          <label for='tweet-text'>What are you humming about?</label>
+          <textarea name='text' id='tweet-text'></textarea>
           <div>
-            <button type="submit">Tweet</button>
-            <output name="counter" class="counter" for="tweet-text">140</output>
+            <button type='submit'>Tweet</button>
+            <output name='counter' class='counter' for='tweet-text'>140</output>
           </div>
         </form>
       </section>
-      <section id="tweets-container">
+      <section id='tweets-container'>
       </section>
     </main>
     <footer>
-      <button id="goToTop">^</button>
+      <button id='goToTop'>^</button>
     </footer>
   </body>
 </html>

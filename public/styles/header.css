@@ -1,15 +1,28 @@
 body > header {
   display: flex;
-  flex-direction: column;
   height: 400px;
   width: 100vw;
-  max-width:100%;
+  max-width: 100%;
   justify-content: center;
-  align-items: center;
   background-color: #da9334;
   border-radius: 10px;
   margin-bottom: 1px;
   background-image: url(../images/foggy-birds.png);
+}
+body > header .logo {
+  font-family: "Bungee", cursive;
+  color: #ffffff;
+  text-shadow: 4px 4px 4px #624117;
+}
+body > header div {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body > header section {
+  display: none;
 }
 body > header img {
   filter: drop-shadow(4px 4px 6px #624117);
@@ -18,23 +31,38 @@ body > header h2 {
   text-shadow: 2px 2px 3px #624117;
   margin-block-start: 0em;
 }
-
-body > header > button.newTweet {
+body > header button.newTweet {
   color: #4056A1;
   background-color: Transparent;
   border: 2px solid #4056A1;
   border-radius: 10px;
 }
 
+@media only screen and (min-width: 657px) {
+  body > header {
+    justify-content: space-between;
+  }
+  body > header section {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0.5rem;
+  }
+  body > header div button {
+    display: none;
+  }
+}
 @media only screen and (min-width: 1024px) {
   body > header {
+    justify-content: center;
     flex: 1;
     margin: 140px 1rem 0px 1rem;
     align-self: normal;
   }
-
-  body > header > button.newTweet {
+  body > header section {
     display: none;
   }
 }
 
+/*# sourceMappingURL=header.css.map */

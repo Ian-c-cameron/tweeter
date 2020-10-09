@@ -5,10 +5,36 @@ article {
   padding: 10px;
   font-weight: normal;
 }
+
+article > header {
+  display: flex;
+  justify-content: space-between;
+}
+
+article > header > div {
+  display: flex;
+  padding: 0.5em;
+}
+
+article > header img {
+  max-width: 60px;
+}
+
+article > header h4 {
+  margin: 1em 5px 1em 5px;
+  font-weight: inherit;
+}
+
+article > header > h4 {
+  color: #c2cae2;
+  display: none;
+}
+
 article > p {
   padding: 1em;
   word-wrap: break-word;
 }
+
 article > footer {
   border-top: 3px solid black;
   font-size: 15px;
@@ -16,24 +42,3 @@ article > footer {
   justify-content: space-between;
   padding: 1em;
 }
-article > header {
-  display: flex;
-  justify-content: space-between;
-}
-article > header img {
-  max-width: 60px;
-}
-article > header h4 {
-  margin: 1em 5px 1em 5px;
-  font-weight: inherit;
-}
-article > header > h4 {
-  color: #c2cae2;
-  display: none;
-}
-article > header > div {
-  display: flex;
-  padding: 0.5em;
-}
-
-/*# sourceMappingURL=article.css.map */

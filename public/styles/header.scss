@@ -1,0 +1,71 @@
+$oShadow: #624117;
+$blue:  #4056A1;
+body > header {
+  display: flex;
+  height: 400px;
+  width: 100vw;
+  max-width:100%;
+  justify-content: center;
+  background-color: #da9334;
+  border-radius: 10px;
+  margin-bottom: 1px;
+  background-image: url(../images/foggy-birds.png);
+  .logo {
+    font-family: 'Bungee', cursive;
+    color: #ffffff;
+    // font-size: 1.7em;
+    text-shadow: 4px 4px 4px $oShadow;
+  }
+  div {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  section {
+    display: none
+  }
+  img {
+    filter: drop-shadow(4px 4px 6px $oShadow);
+  }
+  h2 {
+    text-shadow: 2px 2px 3px $oShadow;
+    margin-block-start: 0em;
+  }
+  button.newTweet {
+    color: $blue;
+    background-color: Transparent;
+    border: 2px solid $blue;
+    border-radius: 10px;
+  }
+}
+@media only screen and (min-width: 657px) {
+  body > header {
+    justify-content: space-between;
+    section {
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 0.5rem;
+    }
+    div {
+      button {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  body > header {
+    justify-content: center;
+    flex: 1;
+    margin: 140px 1rem 0px 1rem;
+    align-self: normal;
+    section {
+      display: none;
+    }
+  }
+}

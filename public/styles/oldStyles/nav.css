@@ -9,19 +9,20 @@ nav {
   border-radius: 10px;
   height: 120px;
   width: 100vw;
-  max-width: 100%;
+  max-width:100%;
   padding: 1.5em;
 }
+
 nav > span {
-  font-family: "Bungee", cursive;
+  font-family: 'Bungee', cursive;
   font-size: 35px;
   text-shadow: 6px 6px 9px #1d284b;
 }
 nav > button.newTweet {
   color: #FFFFFF;
-  background-color: Transparent;
-  border: 2px solid #FFFFFF;
-  border-radius: 10px;
+    background-color: Transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -30,5 +31,3 @@ nav > button.newTweet {
     justify-content: space-between;
   }
 }
-
-/*# sourceMappingURL=nav.css.map */

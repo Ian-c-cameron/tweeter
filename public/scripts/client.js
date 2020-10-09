@@ -69,7 +69,7 @@ const createTweetElement = function(tweet) {
   output += `  </header>`;
   output += `  <p>${escape(tweet.content.text)}</p>`;
   output += `  <footer>`;
-  output += `    <span>${getAge(tweet.createdAt)}</span>`;
+  output += `    <span>${getAge(tweet.created_at)}</span>`;
   output += `    <div>share/like buttons</div>`;
   output += `  </footer>`;
   output += `</article>`;
@@ -157,6 +157,13 @@ $(document).ready(function() {
       }
     });
     
+  });
+  $('#tweet-text').keypress(function(e) {
+    const code = (e.keyCode ? e.keyCode : e.which);//care of Rohan Kumar https://stackoverflow.com/questions/19804378/jquery-to-submit-textarea-with-enter-key
+    if (code === 13) {
+      $(".new-tweet button").trigger('click');
+      return true;
+    }
   });
   /**
    * Tweet Submission
